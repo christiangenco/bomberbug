@@ -1,0 +1,5 @@
+node_modules/
+dist/
+.DS_Store
+archive-2016-react-attempt/
+archive-2020-cra-attempt/

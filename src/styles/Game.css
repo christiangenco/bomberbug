@@ -1,0 +1,270 @@
+/* ── App Layout ───────────────────────────────────────── */
+.app {
+  min-height: 100vh;
+  background: #1a1a2e;
+  color: #eee;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Game Container ──────────────────────────────────── */
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  width: 100%;
+  max-width: 800px;
+  box-sizing: border-box;
+  transition: transform 0.05s ease-out;
+}
+
+.game--shake {
+  animation: shake 0.15s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0); }
+  15% { transform: translate(-4px, 2px); }
+  30% { transform: translate(3px, -2px); }
+  50% { transform: translate(-5px, -1px); }
+  70% { transform: translate(4px, 2px); }
+  85% { transform: translate(-2px, -3px); }
+}
+
+/* ── Grid Wrapper (for death effect overlay) ──────────── */
+.game__grid-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 80vmin;
+  margin: 0 auto;
+}
+
+/* ── Game Toolbar ─────────────────────────────────────── */
+.game__toolbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.game__toolbar button {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #444;
+  color: #eee;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.game__toolbar button:hover {
+  background: #666;
+  transform: scale(1.03);
+}
+
+.game__toolbar button:active {
+  transform: scale(0.97);
+}
+
+/* ── HUD ──────────────────────────────────────────────── */
+.hud {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.player-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  transition: opacity 0.3s ease, background 0.2s ease;
+}
+
+.player-status--dead {
+  opacity: 0.45;
+  background: rgba(255, 50, 50, 0.08);
+}
+
+.player-status__color {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+  transition: border-color 0.2s;
+}
+
+.player-status__name {
+  font-weight: 600;
+}
+
+.player-status__stat {
+  margin-left: 2px;
+}
+
+/* ── Controls Reference ───────────────────────────────── */
+.controls {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.controls__player {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.controls__player strong {
+  margin-right: 2px;
+}
+
+.controls__key {
+  background: rgba(255, 255, 255, 0.12);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.7rem;
+}
+
+/* ── Entity Sprites ───────────────────────────────────── */
+.entity-sprite {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  display: block;
+  transition: transform 0.08s ease-out;
+}
+
+/* ── Fire Pulse ───────────────────────────────────────── */
+.entity-sprite--fire {
+  animation: fire-pulse 0.2s infinite;
+}
+
+@keyframes fire-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+/* ── Bomb Pulse ───────────────────────────────────────── */
+.entity-sprite--bomb {
+  animation: bomb-pulse 0.5s infinite ease-in-out;
+}
+
+.entity-sprite--bomb-urgent {
+  animation: bomb-pulse-urgent 0.25s infinite ease-in-out;
+}
+
+@keyframes bomb-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@keyframes bomb-pulse-urgent {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.15); filter: brightness(1.3); }
+}
+
+/* ── Death Effect Overlay ─────────────────────────────── */
+.death-effect {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  pointer-events: none;
+  z-index: 10;
+  animation: death-boom 0.6s ease-out forwards;
+}
+
+@keyframes death-boom {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.8);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2.5);
+  }
+}
+
+/* ── Sound Controls ───────────────────────────────────── */
+.sound-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sound-controls__mute {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+.sound-controls__mute:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sound-controls__volume {
+  width: 70px;
+  height: 4px;
+  cursor: pointer;
+  accent-color: #6c6;
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 600px) {
+  .game {
+    padding: 6px;
+    gap: 6px;
+  }
+
+  .hud {
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.75rem;
+    gap: 4px;
+  }
+
+  .player-status {
+    padding: 4px 8px;
+  }
+
+  .controls {
+    display: none;
+  }
+
+  .death-effect {
+    font-size: 1.8rem;
+  }
+
+  .sound-controls__volume {
+    width: 50px;
+  }
+}

@@ -1,0 +1,225 @@
+/* ── Menu Screen ──────────────────────────────────────── */
+.menu {
+  text-align: center;
+  padding: 40px 20px;
+  max-width: 500px;
+  width: 100%;
+  animation: fade-in 0.4s ease-out;
+}
+
+.menu h1 {
+  font-size: 2.8rem;
+  margin-bottom: 8px;
+}
+
+.menu__subtitle {
+  color: #aaa;
+  margin-bottom: 32px;
+  font-size: 1rem;
+}
+
+.menu__players {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.menu__players label {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.menu__players button {
+  width: 48px;
+  height: 48px;
+  border: 2px solid #555;
+  border-radius: 10px;
+  background: #2a2a3e;
+  color: #eee;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.menu__players button:hover {
+  border-color: #888;
+  background: #3a3a5e;
+  transform: scale(1.05);
+}
+
+.menu__players button.active {
+  border-color: #6c6;
+  background: #2e5a2e;
+  color: #8f8;
+}
+
+.menu__start {
+  display: inline-block;
+  padding: 14px 48px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4a4, #2a2);
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.15s;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.menu__start:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+.menu__start:active {
+  transform: scale(0.97);
+}
+
+.menu__controls {
+  margin-top: 36px;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+
+.menu__controls h2 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+/* ── GameOver Screen ──────────────────────────────────── */
+.game-over {
+  text-align: center;
+  padding: 60px 20px;
+  max-width: 500px;
+  width: 100%;
+  animation: fade-in 0.4s ease-out;
+}
+
+.game-over h1 {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.game-over__result {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 36px;
+}
+
+.game-over__buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.game-over__buttons button {
+  padding: 12px 32px;
+  border: 2px solid #555;
+  border-radius: 10px;
+  background: #2a2a3e;
+  color: #eee;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.game-over__buttons button:hover {
+  border-color: #888;
+  background: #3a3a5e;
+  transform: scale(1.03);
+}
+
+.game-over__buttons button:active {
+  transform: scale(0.97);
+}
+
+.game-over__buttons button:first-child {
+  border-color: #6c6;
+  background: #2e5a2e;
+}
+
+.game-over__buttons button:first-child:hover {
+  background: #3a6a3a;
+}
+
+/* ── Touch Controls ───────────────────────────────────── */
+.touch-controls {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .touch-controls {
+    display: grid;
+    grid-template-areas:
+      ".    up    .     ."
+      "left down  right bomb";
+    grid-template-columns: 64px 64px 64px 64px;
+    grid-template-rows: 64px 64px;
+    gap: 8px;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    /* prevent text selection on long-press */
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .touch-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: #fff;
+    font-size: 1.4rem;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: background 0.1s, transform 0.1s;
+  }
+
+  .touch-btn:active {
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(0.92);
+  }
+
+  .touch-btn--up    { grid-area: up; }
+  .touch-btn--left  { grid-area: left; }
+  .touch-btn--right { grid-area: right; }
+  .touch-btn--down  { grid-area: down; }
+  .touch-btn--bomb  {
+    grid-area: bomb;
+    background: rgba(255, 80, 80, 0.3);
+    border-color: rgba(255, 100, 100, 0.4);
+    font-size: 1.6rem;
+  }
+  .touch-btn--bomb:active {
+    background: rgba(255, 80, 80, 0.55);
+    transform: scale(0.92);
+  }
+
+  /* Give room for touch controls at bottom */
+  .game {
+    padding-bottom: 170px;
+  }
+}
+
+/* ── Shared Animations ────────────────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

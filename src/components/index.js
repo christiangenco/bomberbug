@@ -1,0 +1,11 @@
+export { default as Game } from './Game.jsx';
+export { default as GridComponent } from './Grid.jsx';
+export { default as Cell } from './Cell.jsx';
+export { default as EntitySprite } from './EntitySprite.jsx';
+export { default as HUD } from './HUD.jsx';
+export { default as Menu } from './Menu.jsx';
+export { default as GameOver } from './GameOver.jsx';
+export { default as Controls } from './Controls.jsx';
+export { default as TouchControls } from './TouchControls.jsx';
+export { default as SoundControls } from './SoundControls.jsx';
+export { default as DeathEffect } from './DeathEffect.jsx';

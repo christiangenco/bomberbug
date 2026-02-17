@@ -1,0 +1,35 @@
+/* ── Grid ─────────────────────────────────────────────── */
+.grid {
+  aspect-ratio: 13 / 11;
+  width: 100%;
+  background: #333;
+  border: 4px solid #555;
+  border-radius: 6px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Cell ─────────────────────────────────────────────── */
+.cell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.cell--light {
+  background: #4a4;
+}
+
+.cell--dark {
+  background: #3a3;
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 600px) {
+  .grid {
+    border-width: 2px;
+    border-radius: 4px;
+  }
+}
